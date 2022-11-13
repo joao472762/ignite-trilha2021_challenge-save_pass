@@ -1,4 +1,4 @@
-import { NativeBaseProvider,VStack } from 'native-base';
+import { NativeBaseProvider,VStack,StatusBar } from 'native-base';
 import { Home } from './src/screens/Home';
 import { Theme } from './src/styles/theme';
 import {Rubik_500Medium,Rubik_400Regular,Rubik_700Bold, useFonts} from '@expo-google-fonts/rubik'
@@ -13,7 +13,12 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={Theme}>
-      <VStack flex={1} bgColor='gray.100'>
+      <StatusBar
+        backgroundColor={'transparent'}
+        barStyle='light-content'
+        translucent
+      />
+      <VStack flex={1} bgColor='gray.300'>
         {fontsLoaded ? <Home/> : <Loader/>}
       </VStack>
     </NativeBaseProvider>

@@ -1,10 +1,18 @@
-import {Avatar as AvatarNavieBase} from 'native-base'
-export function Avatar() {
+import {Avatar as AvatarNavieBase,IAvatarProps} from 'native-base'
+
+interface AvatarProps extends IAvatarProps {}
+export function Avatar(props: AvatarProps) {
     return(
         
         <AvatarNavieBase
-            rounded={4}
-            source={{uri:'https://github.com/joao472762.png'}}
+        rounded={4}
+        height={12}
+        width={12}
+        _image={{
+            rounded:4
+        }}
+        source={{uri:'https://github.com/joao472762.png'}}
+        {...props}
         />
     )
 }

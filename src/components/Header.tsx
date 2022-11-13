@@ -9,10 +9,10 @@ export function Header(){
             backgroundColor: colors.blue['500'],
             paddingTop: 20,
             paddingHorizontal: 24, 
-            height: 180}}
+            height: 200}}
         >
             <HStack alignItems={'center'}>
-                <Avatar/>
+                <Avatar />
                 <VStack flex={1} paddingX={5}>
                     <HStack >
                         <Heading  color='gray.100' fontWeight={'normal'}>Olá, </Heading>
@@ -22,10 +22,11 @@ export function Header(){
                 </VStack>
 
                 <IconButton
+
                     borderColor={'gray.200'}
                     borderWidth={1}
-                    height={10}
-                    width={10}
+                    height={12}
+                    width={12}
                     _icon={{as: Feather, name:'plus', color: 'white'}}
                     _pressed={{
                         borderColor: 'red.100',

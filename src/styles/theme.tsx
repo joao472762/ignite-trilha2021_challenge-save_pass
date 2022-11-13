@@ -2,10 +2,11 @@ import {extendTheme} from 'native-base'
 export  const Theme = extendTheme({
     colors: {
         blue: {
-            500: '#1967FB'
+            500: '#1967FB',
+            
         },
         gray: {
-            500:'#3D434D',
+            700:'#3D434D',
             600: '#888D97',
             300: '#e3e4e5',
             200: '#EBF2FF',
@@ -18,7 +19,8 @@ export  const Theme = extendTheme({
             500:'#E83F5B',
         },
         yellow: {
-            500: '#FFCC00;'
+            500: '#FFCC00',
+            400: '#ecbd01'
         }
     },
     fontConfig: {
@@ -36,6 +38,9 @@ export  const Theme = extendTheme({
         body: 'Rubik',
         mono: 'Rubik'
         
+    },
+    sizes: {
+        14:56
     }
 
 
