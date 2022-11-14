@@ -2,10 +2,13 @@ import { Header } from './components/Header'
 import { Search } from '../../components/Search'
 import {VStack,HStack,Heading} from 'native-base'
 import { PasswordCard } from '../../components/PasswordCard'
+import {NativeStackScreenProps} from '@react-navigation/native-stack'
+import { stackScreensProps } from '../../routes/stack.routes'
 
 export  function Home() {
+   
+
     return(
-      
             <VStack flex={1} bg={'gray.300'}>
                 <Header/>
                 <VStack paddingX={6} mt={-7}>

@@ -1,9 +1,20 @@
-import {VStack,Stack, HStack, Box,useTheme,Text,Heading, IconButton, Icon} from 'native-base'
+import {VStack, HStack, Box,useTheme,Text,Heading, IconButton} from 'native-base'
+import {useNavigation} from '@react-navigation/native'
 import {Feather} from '@expo/vector-icons'
 import { Avatar } from '../../../components/Avatar'
 import {SafeAreaView} from 'react-native-safe-area-context'
+import { stackScreensProps } from '../../../routes/stack.routes'
+type Navegation  = 'Home' | 'hi'
+
 export function Header(){
     const {colors}  = useTheme()
+    const {navigate} = useNavigation()
+
+    function handleGoToRegisterLoginScreen(){
+        navigate('RegisterLogin')
+    }
+    
+    
     return(
         <SafeAreaView style={{
             backgroundColor: colors.blue['500'],
@@ -22,7 +33,6 @@ export function Header(){
                 </VStack>
 
                 <IconButton
-
                     borderColor={'gray.200'}
                     borderWidth={1}
                     height={12}
@@ -33,6 +43,7 @@ export function Header(){
                         opacity: 0.7,
                         
                     }}
+                    onPress={handleGoToRegisterLoginScreen}
                 />
 
             </HStack>

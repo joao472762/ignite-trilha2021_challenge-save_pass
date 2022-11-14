@@ -1,12 +1,18 @@
-import {VStack, IconButton, Heading, useTheme} from 'native-base'
-import {SafeAreaView} from 'react-native-safe-area-context'
 import {Feather} from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import {SafeAreaView} from 'react-native-safe-area-context'
+import {VStack, IconButton, Heading, useTheme} from 'native-base'
 
 interface HeaderProps {
     title: string
 }
 export function Header({title}: HeaderProps){
     const {colors} = useTheme()
+    const {goBack} = useNavigation()
+
+    function handleGoBack(){
+        goBack()
+    }
     return (
         <SafeAreaView style={{
             flexDirection: 'row',
@@ -28,6 +34,7 @@ export function Header({title}: HeaderProps){
                     background: 'gray.100',
                     color: 'blue.700'
                 }}
+                onPress={handleGoBack}
             />
             <VStack flex={1} alignItems='center'  >
                 <Heading
