@@ -1,8 +1,7 @@
+import { Header } from './components/Header'
+import { Search } from '../../components/Search'
 import {VStack,HStack,Heading} from 'native-base'
-import { Header } from '../components/Header'
-import {SafeAreaView} from 'react-native-safe-area-context'
-import { Search } from '../components/Search'
-import { PasswordCard } from '../components/PasswordCard'
+import { PasswordCard } from '../../components/PasswordCard'
 
 export  function Home() {
     return(

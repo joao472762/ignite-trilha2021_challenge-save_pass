@@ -1,43 +1,43 @@
-import {VStack,Stack, HStack, Box,useTheme,Text,Heading, IconButton, Icon} from 'native-base'
-import {Feather} from '@expo/vector-icons'
-import { Avatar } from './Avatar'
+import {VStack, IconButton, Heading, useTheme} from 'native-base'
 import {SafeAreaView} from 'react-native-safe-area-context'
-export function Header(){
-    const {colors}  = useTheme()
-    return(
+import {Feather} from '@expo/vector-icons'
+
+interface HeaderProps {
+    title: string
+}
+export function Header({title}: HeaderProps){
+    const {colors} = useTheme()
+    return (
         <SafeAreaView style={{
-            backgroundColor: colors.blue['500'],
-            paddingTop: 20,
-            paddingHorizontal: 24, 
-            height: 200}}
-        >
-            <HStack alignItems={'center'}>
-                <Avatar />
-                <VStack flex={1} paddingX={5}>
-                    <HStack >
-                        <Heading  color='gray.100' fontWeight={'normal'}>Olá, </Heading>
-                        <Heading color='gray.100' fontWeight={'medium'}>João Souza</Heading>
-                    </HStack>
-                    <Text color='gray.300' fontWeight={'normal'}>Sinta-se seguro aqui</Text>
-                </VStack>
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingHorizontal: 24,
+            backgroundColor: colors.white
 
-                <IconButton
-
-                    borderColor={'gray.200'}
-                    borderWidth={1}
-                    height={12}
-                    width={12}
-                    _icon={{as: Feather, name:'plus', color: 'white'}}
-                    _pressed={{
-                        borderColor: 'red.100',
-                        opacity: 0.7,
-                        
-                    }}
-                />
-
-            </HStack>
-
+        }}>
+            <IconButton
+                width={10}
+                background='transparent'
+                _icon={{
+                    as: Feather,
+                    color: 'blue.500',
+                    name:'chevron-left',
+                    size:'2xl'
+                }}
+                _pressed={{
+                    background: 'gray.100',
+                    color: 'blue.700'
+                }}
+            />
+            <VStack flex={1} alignItems='center'  >
+                <Heading
+                    marginLeft={-10}
+                    color={'gray.700'}
+                    fontWeight={'medium'}
+                >
+                    {title}
+                </Heading>
+            </VStack>
         </SafeAreaView>
-            
     )
 }
