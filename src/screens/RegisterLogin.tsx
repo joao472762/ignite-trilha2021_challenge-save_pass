@@ -1,13 +1,15 @@
 import * as z from 'zod'
 import { useState } from 'react'
+import uuid from 'react-native-uuid';
 import { useForm } from 'react-hook-form'
 import {Feather} from '@expo/vector-icons'
 import {zodResolver} from '@hookform/resolvers/zod'
-import {VStack, Button, IconButton,Text,} from 'native-base'
+import {VStack, Button, IconButton,Text, useToast,} from 'native-base'
 import { TouchableWithoutFeedback, Keyboard,} from 'react-native'
 
 import { Header } from '../components/Header'
 import { Input } from '../components/Form/Input'
+import { useUserAcount } from '../hooks/userAcount'
 
 const  newAcountRegisterFormSchema = z.object({
     serviceName: z.string().trim().min(1,'digite o nome do serviço'),
@@ -20,8 +22,12 @@ export type newAcountRegisterFormData = z.infer<typeof newAcountRegisterFormSche
 
 export function RegisterLogin(){
     const [passwordIsVisible, setPassWordIsVisible] = useState(false)
+    const {addNewAccount} = useUserAcount()
+    const [isLoading, setIsLoading] = useState(false)
 
-    const {control, handleSubmit,reset,formState: {errors}} = useForm<newAcountRegisterFormData>({
+    const toast = useToast()
+
+    const {control, handleSubmit,reset,formState: {errors, isSubmitting}} = useForm<newAcountRegisterFormData>({
         resolver: zodResolver(newAcountRegisterFormSchema),
         defaultValues: {
             serviceName: '',
@@ -30,9 +36,38 @@ export function RegisterLogin(){
         }
     })
 
-    function handleCreateNewAcountRegister(data:newAcountRegisterFormData ){
-        console.log(data)
-        reset()
+    function handleCreateNewAcountRegister(newAccount:newAcountRegisterFormData ){
+        try {
+            setIsLoading(true)
+
+            addNewAccount({
+                id: uuid.v4() as string,
+                password: newAccount.password,
+                profile: newAccount.profile,
+                serviceName: newAccount.serviceName,
+            }) 
+
+            toast.show({
+                placement: 'top',
+                backgroundColor: 'green.500',
+                title: 'conta registada'
+                
+            })
+
+            reset()
+        } catch (error) {
+            toast.show({
+                placement: 'top',
+                backgroundColor: 'danger.500',
+                title: 'não possível registra a senha'
+                
+            })
+        }
+
+        finally {
+            setIsLoading(false)
+        }
+        
     }
 
     function handleChangePasswordVisibility(){
@@ -41,11 +76,13 @@ export function RegisterLogin(){
         : setPassWordIsVisible(true)
     }
 
+    const ButtonIsDisabled = isSubmitting || isLoading
+
     return(
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 
             <VStack flex={1} bgColor='gray.300'>
-                
+
                 <Header title='Cadastro de Senha'/>
 
                 <VStack paddingX={6} marginTop={8}>
@@ -100,6 +137,7 @@ export function RegisterLogin(){
                         backgroundColor={'yellow.500'}
                         padding= {4}
                         marginTop={4}
+                        isLoading={ButtonIsDisabled}
 
                         onPress={handleSubmit(handleCreateNewAcountRegister)}
                     >

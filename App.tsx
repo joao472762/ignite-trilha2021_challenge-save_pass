@@ -1,9 +1,10 @@
 import { NativeBaseProvider,VStack,StatusBar } from 'native-base';
-import { Theme } from './src/styles/theme';
 import {Rubik_500Medium,Rubik_400Regular,Rubik_700Bold, useFonts} from '@expo-google-fonts/rubik'
-import { Loader } from './src/components/Loader';
-import { RegisterLogin } from './src/screens/RegisterLogin';
+
 import { Routes } from './src/routes';
+import { Theme } from './src/styles/theme';
+import { Loader } from './src/components/Loader';
+import { UserAcountsContextProvider } from './src/context/UserAcountsContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -20,7 +21,9 @@ export default function App() {
         translucent
       />
       <VStack flex={1} bgColor='gray.300'>
-        {fontsLoaded ? <Routes/> : <Loader/>}
+        <UserAcountsContextProvider>
+          {fontsLoaded ? <Routes/> : <Loader/>}
+        </UserAcountsContextProvider>
       </VStack>
     </NativeBaseProvider>
   );

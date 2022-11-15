@@ -1,12 +1,26 @@
 import { Header } from './components/Header'
 import { Search } from '../../components/Search'
-import {VStack,HStack,Heading} from 'native-base'
+import {VStack,HStack,Heading,FlatList} from 'native-base'
 import { PasswordCard } from '../../components/PasswordCard'
 import {NativeStackScreenProps} from '@react-navigation/native-stack'
 import { stackScreensProps } from '../../routes/stack.routes'
+import { useUserAcount } from '../../hooks/userAcount'
+import { useState } from 'react'
 
 export  function Home() {
+    const {userAccounts} = useUserAcount()
+    const [userAccountVisibleCounter, setAccountVisibleCounter] = useState(0)
    
+    const AcountsLenght = userAccounts.length
+
+    function updateUserAccountVisibleCounter(action: 'increase' | 'decrease'){
+        if(action === 'increase'){
+            setAccountVisibleCounter(state => state + 1)
+        }
+        else {
+            setAccountVisibleCounter(state => state + 1)
+        }
+    }
 
     return(
             <VStack flex={1} bg={'gray.300'}>
@@ -15,9 +29,22 @@ export  function Home() {
                     <Search/>
                     <HStack alignItems={'center'} justifyContent={'space-between'} marginTop={6}>
                         <Heading fontSize={'2xl'} fontWeight={'bold'} color={'gray.700'}>Suas senhas</Heading>
-                        <Heading fontWeight={'normal'} color='gray.600' fontSize={'lg'}> 01 de total</Heading>
+                        <Heading fontWeight={'normal'} color='gray.600' fontSize={'lg'}>
+                            {userAccountVisibleCounter} de {AcountsLenght}
+                        </Heading>
                     </HStack>
-                    <PasswordCard/>
+                   <FlatList
+                        data={userAccounts}
+                        keyExtractor={item => item.id}
+                        renderItem={({item}) => (
+                            <PasswordCard
+                                updateUserAccountVisibleCounter={updateUserAccountVisibleCounter}
+                                serviceName= {item.serviceName}
+                                password= {item.password}
+                            />
+                        )}
+                   />
+                    
                 </VStack>
 
             </VStack>
