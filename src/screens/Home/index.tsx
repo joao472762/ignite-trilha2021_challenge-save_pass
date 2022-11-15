@@ -1,11 +1,10 @@
+import { useState } from 'react'
+
 import { Header } from './components/Header'
 import { Search } from '../../components/Search'
+import { useUserAcount } from '../../hooks/userAcount'
 import {VStack,HStack,Heading,FlatList} from 'native-base'
 import { PasswordCard } from '../../components/PasswordCard'
-import {NativeStackScreenProps} from '@react-navigation/native-stack'
-import { stackScreensProps } from '../../routes/stack.routes'
-import { useUserAcount } from '../../hooks/userAcount'
-import { useState } from 'react'
 
 export  function Home() {
     const {userAccounts} = useUserAcount()
@@ -18,7 +17,7 @@ export  function Home() {
             setAccountVisibleCounter(state => state + 1)
         }
         else {
-            setAccountVisibleCounter(state => state + 1)
+            setAccountVisibleCounter(state => state + -1)
         }
     }
 

@@ -1,6 +1,6 @@
-import {HStack, VStack, Text,IconButton} from 'native-base'
-import {Feather} from '@expo/vector-icons'
 import { useState } from 'react'
+import {Feather} from '@expo/vector-icons'
+import {HStack, VStack, Text,IconButton} from 'native-base'
 
 interface PasswordCardProps {
     serviceName: string,
@@ -8,8 +8,19 @@ interface PasswordCardProps {
     updateUserAccountVisibleCounter: (action: 'increase' | 'decrease') => void
 }
 
-export function PasswordCard ({password,serviceName}: PasswordCardProps) {
+export function PasswordCard ({password,serviceName,updateUserAccountVisibleCounter}: PasswordCardProps) {
     const [passwordIsVisible, setPasswordIsVisible] = useState(false)
+    function handlePassowordVisibility(){
+     
+        if(passwordIsVisible){
+            setPasswordIsVisible(false)
+            updateUserAccountVisibleCounter('decrease')
+        }
+        else {
+            setPasswordIsVisible(true)
+            updateUserAccountVisibleCounter('increase')
+        }
+    }
     return(
         <HStack bg={'gray.200'} padding={14} rounded={'sm'} marginTop={2}>
             <IconButton
@@ -23,7 +34,7 @@ export function PasswordCard ({password,serviceName}: PasswordCardProps) {
                 _pressed={{
                     background: 'transparent'
                 }}
-                onPress={() => setPasswordIsVisible(!passwordIsVisible)}
+                onPress={handlePassowordVisibility}
             />
             <VStack paddingLeft={4}>
                 <Text
