@@ -5,20 +5,22 @@ import {HStack, VStack, Text,IconButton} from 'native-base'
 interface PasswordCardProps {
     serviceName: string,
     password: string,
-    updateUserAccountVisibleCounter: (action: 'increase' | 'decrease') => void
+    accountId: string,
+    
+    updateUserAccountVisibleCounter: (accountId: string ,action: 'increase' | 'decrease') => void
 }
 
-export function PasswordCard ({password,serviceName,updateUserAccountVisibleCounter}: PasswordCardProps) {
+export function PasswordCard ({password,serviceName,accountId,updateUserAccountVisibleCounter}: PasswordCardProps) {
     const [passwordIsVisible, setPasswordIsVisible] = useState(false)
     function handlePassowordVisibility(){
      
         if(passwordIsVisible){
             setPasswordIsVisible(false)
-            updateUserAccountVisibleCounter('decrease')
+            updateUserAccountVisibleCounter(accountId,'decrease')
         }
         else {
             setPasswordIsVisible(true)
-            updateUserAccountVisibleCounter('increase')
+            updateUserAccountVisibleCounter( accountId, 'increase')
         }
     }
     return(

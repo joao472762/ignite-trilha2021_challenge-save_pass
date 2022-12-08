@@ -23,7 +23,7 @@ export function Header(){
             height: 200}}
         >
             <HStack alignItems={'center'}>
-                <Avatar />
+                <Avatar source={{uri:'https://github.com/joao472762.png'}} />
                 <VStack flex={1} paddingX={5}>
                     <HStack >
                         <Heading  color='gray.100' fontWeight={'normal'}>Olá, </Heading>

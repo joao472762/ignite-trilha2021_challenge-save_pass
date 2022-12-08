@@ -11,7 +11,7 @@ export function Avatar(props: AvatarProps) {
         _image={{
             rounded:4
         }}
-        source={{uri:'https://github.com/joao472762.png'}}
+        
         {...props}
         />
     )

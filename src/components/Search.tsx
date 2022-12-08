@@ -1,12 +1,26 @@
+import { useState } from 'react'
 import {Feather} from '@expo/vector-icons'
 import {HStack, Input,IconButton} from 'native-base'
 
+interface SearchProps {
+    updateUserAccountQuery: (query: string) => void
+}
 
+export function Search({updateUserAccountQuery}: SearchProps){
+    const [accountQuery, setAccontQuery] = useState('')
 
-export function Search(){
+    function handleUpdateUserAccountQuery(){
+        updateUserAccountQuery(accountQuery)
+        setAccontQuery('')
+    }
+
     return(
         <HStack overflow={'hidden'} rounded='lg'>
-            <Input 
+            <Input
+                placeholder='filtre'
+                fontSize={'md'}
+                onChangeText={setAccontQuery}
+                value={accountQuery}
                 rounded={0}
                 height={14}
                 flex={1} bgColor='gray.200'
@@ -22,6 +36,7 @@ export function Search(){
                     
                     background: 'yellow.400'
                 }}
+                onPress={handleUpdateUserAccountQuery}
                 
                 
             />

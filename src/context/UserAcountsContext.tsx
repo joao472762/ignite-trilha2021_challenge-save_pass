@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createContext, ReactNode, useEffect, useState } from "react"
 
-interface UserAccountProps {
+export interface UserAccountProps {
     id: string,
     serviceName: string,
     password: string,
